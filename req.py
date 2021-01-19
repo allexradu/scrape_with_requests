@@ -16,8 +16,8 @@ current_col = 2
 for row in range(1, sh.max_row + 1):
     code = sh.cell(row, 1).value
     data = search_product(code)
+    print(f'row {row}/{sh.max_row}')
     for key in data.keys():
-        print(f'row {row}/{sh.max_row}')
         sh.cell(row, current_col).value = key
         sh.cell(row, current_col + 1).value = data[key]
         current_col += 1
