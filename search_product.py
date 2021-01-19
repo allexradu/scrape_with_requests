@@ -16,6 +16,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 
+
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
 
 chrome_options = Options()
