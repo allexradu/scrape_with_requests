@@ -6,7 +6,7 @@ import openpyxl as xl
 from search_product import search_product
 
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
-excel_file_path = os.path.join(os.getcwd(), 'excel', 'b.xlsx')
+excel_file_path = os.path.join(os.getcwd(), 'excel', 'a.xlsx')
 
 wb = xl.load_workbook(excel_file_path)
 sh = wb[wb.sheetnames[0]]
