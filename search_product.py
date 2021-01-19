@@ -18,20 +18,20 @@ from time import sleep
 
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
 
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("disable-gpu")
+chrome_options.add_argument("window-size=1400,2100")
+chrome_options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome(ChromeDriverManager().install(), options = chrome_options)
+
 
 def search_product(code):
-    chrome_options = Options()
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("disable-gpu")
-    chrome_options.add_argument("window-size=1400,2100")
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options = chrome_options)
-
     url = f'https://www.electricautomationnetwork.com/en/buscador?search_query={code}&submit_search='
 
     driver.get(url)
-    sleep(1)
+    sleep(1.2)
 
     elements = driver.find_elements_by_xpath('//*[@id="resultados_busqueda"]/tbody/tr/td[2]/a/p')
 
