@@ -16,7 +16,6 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 
-
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
 
 chrome_options = Options()
@@ -26,6 +25,9 @@ chrome_options.add_argument("disable-gpu")
 chrome_options.add_argument("window-size=1400,2100")
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(ChromeDriverManager().install(), options = chrome_options)
+
+
+# driver = webdriver.Chrome()
 
 
 def search_product(code):
