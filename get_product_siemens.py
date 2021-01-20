@@ -8,10 +8,13 @@ characters = ['+', '\n', 'REACH', '€', 'Title', 'UNSPSC', 'VersionClassificati
 
 
 def get_data(code):
-    # url = f'https://mall.industry.siemens.com/mall/en/WW/Catalog/Product/{code}'
-    url = f'https://mall.industry.siemens.com/mall/en/WW/Catalog/Product/?mlfb={code}'
-    page = requests.get(url)
-    print(url)
+    if code.find(':') == -1:
+        url = f'https://mall.industry.siemens.com/mall/en/WW/Catalog/Product/{code}'
+    else:
+        url = f'https://mall.industry.siemens.com/mall/en/WW/Catalog/Product/?mlfb={code}'
+
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
+    page = requests.get(url, headers = headers)
     doc = lh.fromstring(page.content)
 
     tr_elements = doc.xpath('//tr')
@@ -25,6 +28,8 @@ def get_data(code):
             if item in column_text:
                 return False
         return True
+
+    'https://mall.industry.siemens.com/mall/en/ww/Catalog/DatasheetDownload?downloadUrl=teddatasheet%2F%3Fformat%3DPDF%26caller%3DMall%26mlfbs%3D3NA3820%26language%3Den'
 
     for row in tr_elements:
         if len(row) in [2, 3]:
