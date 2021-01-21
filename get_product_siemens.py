@@ -29,7 +29,7 @@ def get_data(code):
 
     img = doc.cssselect('td#content div.pictureArea.pictureAreaCursor > img')
     if img:
-        data.update({'image1': img.attrib['src']})
+        data.update({'image1': img[0].attrib['src']})
 
     def check_for_illegal_characters(column_text, illegal_characters):
         for item in illegal_characters:
@@ -80,4 +80,4 @@ def get_data(code):
 
 
 # with open(json_file, "w") as outfile:
-#     json.dump(get_data('1FK7032-5AK71-1LH3'), outfile, indent = 4)
+#     json.dump(get_data('1FK7022-5AK71-1LG3'), outfile, indent = 4)
