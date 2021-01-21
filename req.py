@@ -6,7 +6,7 @@ import openpyxl as xl
 from get_product_siemens import get_data
 
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
-excel_file_path = os.path.join(os.getcwd(), 'excel', 'd.xlsx')
+excel_file_path = os.path.join(os.getcwd(), 'excel', 'a.xlsx')
 
 wb = xl.load_workbook(excel_file_path)
 sh = wb[wb.sheetnames[0]]
