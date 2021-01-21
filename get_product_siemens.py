@@ -79,5 +79,5 @@ def get_data(code):
     return data
 
 
-with open(json_file, "w") as outfile:
-    json.dump(get_data('1FK7032-5AK71-1LH3'), outfile, indent = 4)
+# with open(json_file, "w") as outfile:
+#     json.dump(get_data('1FK7032-5AK71-1LH3'), outfile, indent = 4)
