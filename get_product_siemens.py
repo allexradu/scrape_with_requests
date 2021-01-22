@@ -29,7 +29,7 @@ def get_data(code):
         page = send_request(url)
     else:
         return None
-    
+
     doc = lh.fromstring(page.content)
 
     tr_elements = doc.xpath('//tr')
@@ -53,27 +53,26 @@ def get_data(code):
     for row in tr_elements:
         if len(row) in [2, 3]:
             for col in range(len(row)):
-                for col in range(len(row)):
-                    col_data = str(row[col].text_content())
-                    if check_for_illegal_characters(col_data, characters):
-                        if len(col_data) != "":
-                            skip = False
-                            if col == 0:
-                                key = col_data
-                                # print('key: ', key)
-                            if len(row) == 2:
-                                if col == 1:
-                                    value = col_data
-                                    # print('value: ', value)
-                            else:
-                                if col == 1:
-                                    value = col_data
-                                    # print('value 1: ', value)
-                                if col == 2:
-                                    value += col_data
-                                    # print('value 2: ', value)
-                    else:
-                        skip = True
+                col_data = str(row[col].text_content())
+                if check_for_illegal_characters(col_data, characters):
+                    if len(col_data) != "":
+                        skip = False
+                        if col == 0:
+                            key = col_data
+                            # print('key: ', key)
+                        if len(row) == 2:
+                            if col == 1:
+                                value = col_data
+                                # print('value: ', value)
+                        else:
+                            if col == 1:
+                                value = col_data
+                                # print('value 1: ', value)
+                            if col == 2:
+                                value += col_data
+                                # print('value 2: ', value)
+                else:
+                    skip = True
             if not skip:
                 if key != "" and value != "":
                     if 'DataSheet in PDF' not in key:
@@ -89,5 +88,6 @@ def get_data(code):
 
     return data
 
-# with open(json_file, "w") as outfile:
-#     json.dump(get_data('1FK7022-5AK71-1LG3'), outfile, indent = 4)
+
+with open(json_file, "w") as outfile:
+    json.dump(get_data('1FK7022-5AK71-1LG3'), outfile, indent = 4)
