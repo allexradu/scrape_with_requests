@@ -3,12 +3,20 @@ import lxml.html as lh
 import json
 import os
 from lxml import html
+from requests.exceptions import ConnectionError
 
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
 characters = ['Show prices', 'List Price', 'Customer Price', 'Service & Support', 'eClass', 'REACH']
 
 
 # ['+', '\n', 'REACH', '€', 'Title', 'UNSPSC', 'VersionClassification']
+
+def send_request(url):
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
+        return requests.get(url, headers = headers)
+    except ConnectionError:
+        return None
 
 
 def get_data(code):
@@ -17,8 +25,11 @@ def get_data(code):
     else:
         url = f'https://mall.industry.siemens.com/mall/en/WW/Catalog/Product/?mlfb={code}'
 
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
-    page = requests.get(url, headers = headers)
+    if send_request(url) is not None:
+        page = send_request(url)
+    else:
+        return None
+    
     doc = lh.fromstring(page.content)
 
     tr_elements = doc.xpath('//tr')
@@ -77,7 +88,6 @@ def get_data(code):
             value = ''
 
     return data
-
 
 # with open(json_file, "w") as outfile:
 #     json.dump(get_data('1FK7022-5AK71-1LG3'), outfile, indent = 4)

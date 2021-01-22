@@ -5,6 +5,7 @@ import os
 import openpyxl as xl
 from get_product_siemens import get_data
 
+
 json_file = os.path.join(os.getcwd(), 'json', 'table.json')
 excel_file_path = os.path.join(os.getcwd(), 'excel', 'a.xlsx')
 
